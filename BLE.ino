@@ -32,6 +32,7 @@ void setup() { // setup function declaration and definition
 bool redLED = true; // boolean variable declaration and assignment
 bool blueLED = true; // boolean variable declaration and assignment
 bool greenLED = true; // boolean variable declaration and assignment
+bool piezoFlop = false;
 
 void loop() { // loop function declaration and definition
 
@@ -63,11 +64,12 @@ void loop() { // loop function declaration and definition
           blueLED = !blueLED; // invert the boolean variable
           
         } else if (switchCharacteristic.value() == 4) { // if the characteristic value is equal to 4
-          // add stuff that you want in here, anything put in here will be called when you submit the number specified
+          piezoFlop = !piezoFlop; // invert the flop value
+          piezoFlop ? tone(piezoPin,1000) : noTone(piezoPin); // turn on the piezo (look up the ternary operator)
         } else if (switchCharacteristic.value() == 5) { // if the characteristic value is equal to 5
-          // add stuff that you want in here, anything put in here will be called when you submit the number specified
+          
         } else if (switchCharacteristic.value() == 6) { // if the characteristic value is equal to 6
-          // add stuff that you want in here, anything put in here will be called when you submit the number specified
+          
         } // end of else if statement chain
       } // end of characterstic written if statement
     } // end of central device while loop
