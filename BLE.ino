@@ -63,11 +63,11 @@ void loop() { // loop function declaration and definition
           blueLED = !blueLED; // invert the boolean variable
           
         } else if (switchCharacteristic.value() == 4) { // if the characteristic value is equal to 4
-          
+          // add stuff that you want in here, anything put in here will be called when you submit the number specified
         } else if (switchCharacteristic.value() == 5) { // if the characteristic value is equal to 5
-          
+          // add stuff that you want in here, anything put in here will be called when you submit the number specified
         } else if (switchCharacteristic.value() == 6) { // if the characteristic value is equal to 6
-          
+          // add stuff that you want in here, anything put in here will be called when you submit the number specified
         } // end of else if statement chain
       } // end of characterstic written if statement
     } // end of central device while loop
