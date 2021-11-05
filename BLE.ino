@@ -1,3 +1,39 @@
+/*
+Tutorial 2 BLE
+Jakob Parpart
+11/4/2021
+GHS 2021/2022
+Electrical Engineering Honors
+Coach L.
+
+This Program makes use of a Piezo buzzer and a RGB LED along with the bluetooth function of the Arduino board.
+Using the nRF connect app on your cellphone, you can connect to the arduino, then you are able to navigate to the bottom right of the screen, press the "up"
+arrow and type in any number between 1 and 4.
+
+Number 1 will turn on Red LED
+Number 2 will turn on Green LED
+Number 3 will turn on Blue LED
+Number 4 will turn on the Piezo
+
+If you type in lets say, 1, and then a 2. It will combine both commands and light up Red and Green.
+Same with the Piezo, if you are to type 1 and 4, the Red light will turn on along with the Piezo.
+There are many different combinations that you are able to make.
+
+Board Setup:
+The GND port goes to the ground leg of the RGB LED
+GND port (2) goes to the negative side of the piezo.
+DIO 13 leads to positive side of the piezo
+DIO 12 to a 220 ohm resistor followed by the Red leg of the LED
+DIO 11 to 220 ohm resistor followed by the Green leg of LED
+DIO 10 to 220 ohm resistor followed by the Blue leg of LED
+GND port (2) goes to the negative side of the piezo.
+
+ */
+
+
+
+
+
 #include <CurieBLE.h> // including CurieBLE header file (think of the file as being inserted on top of this program)
 
 BLEService piezoService("19B10000-E8F2-537E-4F6C-D104768A1214"); // create a new instance of the BLEService class
