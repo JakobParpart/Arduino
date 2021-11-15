@@ -1,0 +1,28 @@
+/*
+Jakob Kay Parpart 
+11/15/21
+Gloucester High School
+Coach L.
+Electrical Engineering Honors
+
+
+*/
+
+const int ledPin = A1; //initialize a new variable
+const int potPin = A0; //creating new variable
+int potVal = 0; //initialize a new variable
+
+
+void setup() { //setup function
+  Serial.begin(9600); // initialize serial monitor
+  pinMode(ledPin, OUTPUT); // initialize LED pin
+  Serial.println("Finished Setup"); //print finished setup
+} //end of setup
+
+void loop() { //loop function
+  potVal = analogRead(A0); // read analogValue and assign it to a variable
+  potVal = map(potVal,0,1023,0,255); //mapping the analog range to the RGB range
+  analogWrite(ledPin,potVal); // change the brightness of the RGB LED
+  Serial.print("potVal = "); //assertment                                   
+  Serial.println(potVal); //assertment (print value)
+} //end of loop
