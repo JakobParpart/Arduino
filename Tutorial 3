@@ -5,24 +5,47 @@ Gloucester High School
 Coach L.
 Electrical Engineering Honors
 
+This program makes use of a potentiometer along with a RGB LED in order to precisely control the brightness of the LED.
+Turning the potentiometer changes the brightness.
+
+Board Setup:
+
+GND port goes to negative side of Potentiometer
+GND port goes to the ground leg of the RGB LED
+GND goes to the back of the breadboard to the negative strip
+A0 port goes to the outside leg of the potentiometer
+A1 port goes to a pair of LEDS in parallel. 
+One leg of the led is infront of the other with the other legs stuck into the negative strip on the breadboard
+3.5V port goes to other outside leg of Potentiometer
+DIO 12 goes to a 220 ohm resistor followed by the red leg of the LED
+DIO 11 goes to a 220 ohm resistor followed by the green leg of the LED
+DIO 10 goes to a 220 ohm resistor followed by the blue leg of the LED
+
+
 
 */
 
-const int ledPin = A1; //initialize a new variable
+const int redPin = 6; //initialize a new variable
+const int greenPin = 5; //initialize a new variable
+const int bluePin = 3; //initialize a new variable
 const int potPin = A0; //creating new variable
 int potVal = 0; //initialize a new variable
 
 
 void setup() { //setup function
   Serial.begin(9600); // initialize serial monitor
-  pinMode(ledPin, OUTPUT); // initialize LED pin
+  pinMode(redPin, OUTPUT); // initialize LED pin
+  pinMode(greenPin, OUTPUT); // initialize LED pin
+  pinMode(bluePin, OUTPUT); // initialize LED pin
   Serial.println("Finished Setup"); //print finished setup
 } //end of setup
 
 void loop() { //loop function
   potVal = analogRead(A0); // read analogValue and assign it to a variable
   potVal = map(potVal,0,1023,0,255); //mapping the analog range to the RGB range
-  analogWrite(ledPin,potVal); // change the brightness of the RGB LED
+  analogWrite(redPin,potVal); // change the brightness of the RGB LED
+  analogWrite(greenPin,potVal); // change the brightness of the RGB LED
+  analogWrite(bluePin,potVal); // change the brightness of the RGB LED
   Serial.print("potVal = "); //assertment                                   
   Serial.println(potVal); //assertment (print value)
 } //end of loop
