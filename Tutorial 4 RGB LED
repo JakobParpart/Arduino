@@ -1,0 +1,47 @@
+/*
+Tutorial 4 Modified
+Jakob Parpart
+GHS 2021/2022
+Coach L.
+Electrical Engineering Honors
+ */
+ 
+int redPin = 9; //Pin for the red RGB led pin (pwm pin)
+int greenPin = 6; //Pin for the green RGB led pin (pwm pin)
+int bluePin = 5; //Pin for the blue RGB led pin (pwn pin)
+ 
+int potPin_red = A2;  //declare pin for the potentiometer for the red LED
+int potPin_green = A1;  //declare pin for the potentiometer for the green LED
+int potPin_blue = A0;  //declare pin for the potentiometer for the blue LED
+ 
+int readValue_red; //declare variable to store the read value from the potentiometer which controls the red LED
+int readValue_green; //declare variable to store the read value from the potentiometer which controls the green LED
+int readValue_blue; //declare variable to store the read value from the potentiometer which controls the blue LED
+ 
+int writeValue_red; //declare variable to send to the red LED
+int writeValue_green; //declare variable to send to the green LED
+int writeValue_blue; //declare variable to send to the blue LED
+ 
+void setup() {
+  pinMode(potPin_red, INPUT); //set potentiometer for red LED as input
+  pinMode(potPin_green, INPUT); //set potentiometer for green LED as input
+  pinMode(potPin_blue, INPUT); //set potentiometer for blue LED as input
+  
+  pinMode(redPin,OUTPUT); //set pin for red LED as output
+  pinMode(bluePin,OUTPUT); //set pin for green LED as output
+  pinMode(greenPin, OUTPUT); //set pin for blue LED as output
+}
+ 
+void loop() {
+  readValue_red = analogRead(potPin_red); //Read voltage from potentiometer to control red LED
+  readValue_green = analogRead(potPin_green); //Read voltage from potentiometer to control green LED
+  readValue_blue = analogRead(potPin_blue); //Read voltage from potentiometer to control blue LED
+  
+  writeValue_red = (255./1023.)*readValue_red; //Calculate the value to write on the red LED (add point to change to float point)
+  writeValue_green = (255./1023.)*readValue_green; //Calculate the value to write on the green LED
+  writeValue_blue = (255./1023.)*readValue_blue; ///Calculate the value to write on the blue LED
+  
+  analogWrite(redPin,writeValue_red); //write value to set the brightness of the red LED
+  analogWrite(greenPin,writeValue_green); //write value to set the brightness of the green LED
+  analogWrite(bluePin,writeValue_blue); //write value to set the brightness of the blue LED
+}
