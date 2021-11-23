@@ -1,9 +1,34 @@
 /*
-Tutorial 4 Modified
+Tutorial 4 RGB LED
 Jakob Parpart
 GHS 2021/2022
 Coach L.
 Electrical Engineering Honors
+
+This Tutorial makes use of an RGB LED along with three potentiometers.
+Each potentiometer is in charge of controlling the brightness of each LED
+One for red, one for green and one for blue.
+The potentiometers are reprogrammed to include values between 0 and 255.
+This allows for precise control of the color of the individual LEDS.
+Since I am using three seperate potentiometers you can mix the colors to create millions of different variations.
+
+Board Setup:
+DIO 5 (pwm) -> 330 ohm resistor -> Blue leg of LED
+DIO 6 (pwm) -> 330 ohm resistor -> Green leg of LED
+DIO 9 (pwm) -> 330 ohm resistor -> Red leg of LED
+
+5V -> positive strip on breadboard
+GND -> ground strip on breadboard
+
+A0 -> Blue Potentiometer
+A1 -> Green Potentiometer
+A2 -> Red Potentiometer
+
+Ground strip to ground leg of RGB LED
+
+Each of the potentiometers have a wire going from the ground strip to the ground legs on the potentiometers.
+Each potentiometer has a wire going from the positive strip to the positive leg on the potentiometer.
+
  */
  
 int redPin = 9; //Pin for the red RGB led pin (pwm pin)
