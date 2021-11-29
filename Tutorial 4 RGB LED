@@ -47,7 +47,9 @@ int writeValue_red; //declare variable to send to the red LED
 int writeValue_green; //declare variable to send to the green LED
 int writeValue_blue; //declare variable to send to the blue LED
  
-void setup() {
+void setup() { // beginning of setup
+  Serial.begin(9600);// initialize serial monitor
+  while(!Serial); //wait until serial monitor is open
   pinMode(potPin_red, INPUT); //set potentiometer for red LED as input
   pinMode(potPin_green, INPUT); //set potentiometer for green LED as input
   pinMode(potPin_blue, INPUT); //set potentiometer for blue LED as input
@@ -55,12 +57,20 @@ void setup() {
   pinMode(redPin,OUTPUT); //set pin for red LED as output
   pinMode(bluePin,OUTPUT); //set pin for green LED as output
   pinMode(greenPin, OUTPUT); //set pin for blue LED as output
-}
+  Serial.println("End of Setup"); //serial monitor assertment
+  delay(1000); // 1 second delay
+} // end of setup
  
-void loop() {
+void loop() { //beginning of loop
   readValue_red = analogRead(potPin_red); //Read voltage from potentiometer to control red LED
   readValue_green = analogRead(potPin_green); //Read voltage from potentiometer to control green LED
   readValue_blue = analogRead(potPin_blue); //Read voltage from potentiometer to control blue LED
+  Serial.print("Red Value = "); //asserment
+  Serial.println(readValue_red); //assertment
+  Serial.print("Green Value = "); //assertment
+  Serial.println(readValue_green); //assertment
+  Serial.print("Blue Value = "); //assertment
+  Serial.println(readValue_blue); //assertment
   
   writeValue_red = (255./1023.)*readValue_red; //Calculate the value to write on the red LED (add point to change to float point)
   writeValue_green = (255./1023.)*readValue_green; //Calculate the value to write on the green LED
@@ -69,4 +79,5 @@ void loop() {
   analogWrite(redPin,writeValue_red); //write value to set the brightness of the red LED
   analogWrite(greenPin,writeValue_green); //write value to set the brightness of the green LED
   analogWrite(bluePin,writeValue_blue); //write value to set the brightness of the blue LED
-}
+  delay(500); //delay 500ms
+} // end of loop
