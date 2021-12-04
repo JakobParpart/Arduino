@@ -1,0 +1,54 @@
+/*
+Tutorial 5 Modified Runway Array
+Jakob Parpart
+GHS 2021/2022
+Electrical Engineering Honors
+Coach L.
+
+This program makes use of 10 LEDS total. Along with a potentiometer.
+3 red LEDS, 3 yellow LEDS, 3 green LEDS and one blue LED
+Twisting the potentiometer will turn on the leds in order from the 1st red LED to the last green one.
+When the potentiometer is turned to max all the LEDS will b on along with the blue one. 
+The blue LED is just to show that the potentiometer is turned all the way.
+
+
+
+
+ */
+
+
+
+const int analogPin = A0;   // the pin that the potentiometer is attached to
+const int ledCount = 10;    // the number of LEDs in the bar graph
+
+int ledPins[] = {
+ 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
+};   // an array of pin numbers to which LEDs are attached
+
+
+void setup() {
+  // loop over the pin array and set them all to output:
+  for (int thisLed = 0; thisLed < ledCount; thisLed++) {
+    pinMode(ledPins[thisLed], OUTPUT);
+  }
+}
+
+void loop() {
+  // read the potentiometer:
+  int sensorReading = analogRead(analogPin);
+  // map the result to a range from 0 to the number of LEDs:
+  int ledLevel = map(sensorReading, 0, 1023, 0, ledCount);
+
+  // loop over the LED array:
+  for (int thisLed = 0; thisLed < ledCount; thisLed++) {
+    // if the array element's index is less than ledLevel,
+    // turn the pin for this element on:
+    if (thisLed < ledLevel) {
+      digitalWrite(ledPins[thisLed], HIGH);
+    }
+    // turn off all pins higher than the ledLevel:
+    else {
+      digitalWrite(ledPins[thisLed], LOW);
+    }
+  }
+}
