@@ -13,7 +13,6 @@ The blue LED is just to show that the potentiometer is turned all the way.
 
 
 
-
  */
 
 
@@ -22,37 +21,38 @@ const int analogPin = A0;   // the pin that the potentiometer is attached to
 const int ledCount = 10;    // the number of LEDs in the bar graph
 
 int ledPins[] = {
- 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
-};   // an array of pin numbers to which LEDs are attached
+ 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 // an array of pin numbers to which LEDs are attached
+};   // end of LED pin declaration
 
-
-void setup() {
+void setup() { //beginning of setup
   Serial.begin(9600); //start serial monitor
   while(!Serial); //wait till usb device is recognized
   for (int led : ledPins) { // loop over the pin array and set them all to output:
-    pinMode(led, OUTPUT);
-  }
+    pinMode(led, OUTPUT);// setting the pinmode as output
+  }//end of for loop
   Serial.println("End of Setup"); //serial print for end of setup
-}
+}// end of void setup
 
-void loop() {
+void loop() { //beginning of void loop
   // read the potentiometer:
-  int sensorReading = analogRead(analogPin);
+  int sensorReading = analogRead(analogPin); //potentiometer analog pin setup
   // map the result to a range from 0 to the number of LEDs:
-  int ledLevel = map(sensorReading, 0, 1023, 0, ledCount);
+  int ledLevel = map(sensorReading, 0, 1023, 0, ledCount); //setting potentiometer reading to 0-1023
 
   // loop over the LED array:
-  for (int thisLed = 0; thisLed < ledCount; thisLed++) {
+  for (int thisLed = 0; thisLed < ledCount; thisLed++) { //start of for loop
     // if the array element's index is less than ledLevel,
     // turn the pin for this element on:
-    if (thisLed < ledLevel) {
-      digitalWrite(ledPins[thisLed], HIGH);
+    if (thisLed < ledLevel) { //start of if statement
+      digitalWrite(ledPins[thisLed], HIGH); //setting LED to high
       
-    }
-    // turn off all pins higher than the ledLevel:
-    else {
-      digitalWrite(ledPins[thisLed], LOW);
-    }
-    Serial.println(ledLevel);
-  }
-}
+    }//end of if statement
+    
+    else {// start of else statement
+      digitalWrite(ledPins[thisLed], LOW); // turn off all pins higher than the ledLevel:
+    } //end of else
+    Serial.print("led Level = "); //serial monitor printout
+    Serial.println(ledLevel); //printing out LED level
+    delay(200); //delays the program, making it easier to read
+  } //end of else
+}//end of whole program
