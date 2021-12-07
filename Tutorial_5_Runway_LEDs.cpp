@@ -4,7 +4,6 @@ Jakob Parpart
 GHS 2021/2022
 Electrical Engineering Honors
 Coach L.
-
 This program makes use of 10 LEDS total. Along with a potentiometer.
 3 red LEDS, 3 yellow LEDS, 3 green LEDS and one blue LED
 Twisting the potentiometer will turn on the leds in order from the 1st red LED to the last green one.
@@ -12,8 +11,7 @@ When the potentiometer is turned to max all the LEDS will b on along with the bl
 The blue LED is just to show that the potentiometer is turned all the way.
 
 
-
- */
+*/
 
 
 
@@ -53,6 +51,6 @@ void loop() { //beginning of void loop
     } //end of else
     Serial.print("led Level = "); //serial monitor printout
     Serial.println(ledLevel); //printing out LED level
-    delay(200); //delays the program, making it easier to read
+    //delay(200); //delays the program, making it easier to read
   } //end of else
 }//end of whole program
