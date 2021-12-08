@@ -9,8 +9,6 @@ This program makes use of 10 LEDS total. Along with a potentiometer.
 Twisting the potentiometer will turn on the leds in order from the 1st red LED to the last green one.
 When the potentiometer is turned to max all the LEDS will b on along with the blue one. 
 The blue LED is just to show that the potentiometer is turned all the way.
-
-
 */
 
 
@@ -28,7 +26,7 @@ void setup() { //beginning of setup
   for (int led : ledPins) { // loop over the pin array and set them all to output:
     pinMode(led, OUTPUT);// setting the pinmode as output
   }//end of for loop
-  Serial.println("End of Setup"); //serial print for end of setup
+  //Serial.println("End of Setup"); //serial print for end of setup
 }// end of void setup
 
 void loop() { //beginning of void loop
@@ -49,8 +47,8 @@ void loop() { //beginning of void loop
     else {// start of else statement
       digitalWrite(ledPins[thisLed], LOW); // turn off all pins higher than the ledLevel:
     } //end of else
+    
+  } //end of for loop
     Serial.print("led Level = "); //serial monitor printout
     Serial.println(ledLevel); //printing out LED level
-    //delay(200); //delays the program, making it easier to read
-  } //end of else
 }//end of whole program
