@@ -1,15 +1,37 @@
-/*
-Tutorial 5 Modified Runway Array
-Jakob Parpart
-GHS 2021/2022
-Electrical Engineering Honors
-Coach L.
-This program makes use of 10 LEDS total. Along with a potentiometer.
-3 red LEDS, 3 yellow LEDS, 3 green LEDS and one blue LED
-Twisting the potentiometer will turn on the leds in order from the 1st red LED to the last green one.
-When the potentiometer is turned to max all the LEDS will b on along with the blue one. 
-The blue LED is just to show that the potentiometer is turned all the way.
-*/
+/****************************************************************************************************************************************************************************
+Tutorial 5 Modified Runway Array                                                                                                                                           **
+Jakob Parpart                                                                                                                                                              **
+GHS 2021/2022                                                                                                                                                              **
+Electrical Engineering Honors                                                                                                                                              **
+Coach L.                                                                                                                                                                   **
+This program makes use of 10 LEDS total. Along with a potentiometer.                                                                                                       **
+3 red LEDS, 3 yellow LEDS, 3 green LEDS and one blue LED                                                                                                                   **
+Twisting the potentiometer will turn on the leds in order from the 1st red LED to the last green one.                                                                      **
+When the potentiometer is turned to max all the LEDS will b on along with the blue one.                                                                                    **
+The blue LED is just to show that the potentiometer is turned all the way.                                                                                                 **
+                                                                                                                                                                           **
+Board Setup:                                                                                                                                                               **
+DIO -> 330ohm Resistor -> Red LED                                                                                                                                          **
+DIO -> 330ohm Resistor -> Red LED                                                                                                                                          **
+DIO -> 330ohm Resistor -> Red LED                                                                                                                                          **
+DIO -> 330ohm Resistor -> Yellow LED                                                                                                                                       **
+DIO -> 330ohm Resistor -> Yellow LED                                                                                                                                       **
+DIO -> 330ohm Resistor -> Yellow LED                                                                                                                                       **
+DIO -> 330ohm Resistor -> Green LED                                                                                                                                        **
+DIO -> 330ohm Resistor -> Green LED                                                                                                                                        **
+DIO -> 330ohm Resistor -> Green LED                                                                                                                                        **
+DIO -> 330ohm Resistor -> Blue LED (to show max)                                                                                                                           **
+                                                                                                                                                                           **
+GND -> Ground strip on Breadboard                                                                                                                                          **
+GND -> Ground leg of Potentiometer                                                                                                                                         **
+5V -> Positive leg of Potentiometer                                                                                                                                        **
+A0 -> Analog leg of LED                                                                                                                                                    **
+                                                                                                                                                                           **
+*Note*                                                                                                                                                                     **
+I used the 5V pin instead of the 3.3V because the 3.3V didn't have nearly enough power                                                                                     **
+to light all 10 LEDs, it would only light the red and yellows leaving the green and blues                                                                                  **
+with no power.                                                                                                                                                             **
+****************************************************************************************************************************************************************************/
 
 
 
