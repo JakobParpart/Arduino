@@ -10,32 +10,31 @@ int transistorPin = 3; //declares what pin the transistor goes to
 
 
 
-void setup()
+void setup()//start of setup
 {
 
-Serial.begin(9600);
-pinMode(8, OUTPUT);
-pinMode(9, OUTPUT);
-pinMode(transistorPin, OUTPUT);
-}
+Serial.begin(9600); //starts serial monitor
+pinMode(8, OUTPUT); //sets pin 8 to output
+pinMode(9, OUTPUT); //sets pin 9 to output
+pinMode(transistorPin, OUTPUT); //sets the transistor pin to output
+}//end of setup
 
 
-void loop()
+void loop() //start of loop
 {
 
-sensorValue = analogRead(analogInPin)/4;
-outputValue = map(sensorValue, 0, 1023, 0, 255);
-analogWrite(transistorPin, sensorValue);
-if (sensorValue >= 160)
+sensorValue = analogRead(analogInPin)/4; //reads the sensors value
+outputValue = map(sensorValue, 0, 1023, 0, 255); //remaps potentiometer from 0-1023 to 0-255
+analogWrite(transistorPin, sensorValue); //reads transistor pins value
+if (sensorValue >= 160) //if sensor value is greater than 160 turn on led
 {
 
-//example
-digitalWrite(8, HIGH);
-digitalWrite(9, LOW);
+digitalWrite(8, HIGH); //sets pin 8 to high
+digitalWrite(9, LOW); //sets pin 9 to low
 }
 
-else
-{ digitalWrite(9, HIGH);
-digitalWrite(8, LOW);
-}
-delay(10); }
+else //start of else statement
+{ digitalWrite(9, HIGH); //sets pin 9 to high
+digitalWrite(8, LOW); //sets pin 8 to low
+} //end of else
+delay(10); } //delay the program
