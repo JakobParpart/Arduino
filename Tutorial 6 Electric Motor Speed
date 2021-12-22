@@ -1,4 +1,16 @@
+/*
+Tutorial 6 Car Motor
+Jakob Parpart
+GHS 2021/2022
+Electrical Engineering Honors
+Coach L.
 
+This program makes use of a potentiometer, transistor and motor.
+The potentiometer changes the speed of the motor depending on how far its twisted.
+ 
+ 
+ 
+ */
 
 
 
