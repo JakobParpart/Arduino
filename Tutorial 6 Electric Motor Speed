@@ -7,6 +7,29 @@ Coach L.
 
 This program makes use of a potentiometer, transistor and motor.
 The potentiometer changes the speed of the motor depending on how far its twisted.
+Along with this I have wired up 3 LED's. 
+One red, one yellow and one green.
+They will light up in order from red to green.
+Red is from values 0 -> 85.
+Yellow is from values 85 -> 170
+Green is from values 170-255.
+This will allow the user to see how far the potentiometer is turned
+Along with this I have a serial monitor printout which allows you to see
+what the value of the potentiometer is. 
+Therefore increasing the potentiometer will increase the motor speed but also tell you the speed
+precisely with the serial monitor and roughly with the three LED's
+
+Board Setup
+->
+->
+->
+->
+->
+->
+->
+->
+->
+
  
  
  
@@ -19,14 +42,14 @@ int analogInPin = A0; //Declares analog pin to potentiometer
 int sensorValue = 0;// setes sensor value
 //int outputValue = 0; //declares output value
 int transistorPin = 3; //declares what pin the transistor goes to
-int redPin = 11;
-int yellowPin = 12;
-int greenPin = 13;
+int redPin = 11; //declares what pin the red led is assigned to
+int yellowPin = 12; //declares what pin the yellow led is assigned to
+int greenPin = 13; //declares what pin the green LED is assigned to
 
 
 
 void setup()//start of setup
-{
+{//start of setup
 
 Serial.begin(9600); //starts serial monitor
 pinMode(8, OUTPUT); //sets pin 8 to output
@@ -36,19 +59,19 @@ pinMode(transistorPin, OUTPUT); //sets the transistor pin to output
 
 
 void loop() //start of loop
-{
+{ //start of loop
 
 sensorValue = analogRead(analogInPin); //reads the sensors value
 sensorValue = map(sensorValue, 0, 1023, 0, 255); //remaps potentiometer from 0-1023 to 0-255
 analogWrite(transistorPin, sensorValue); //reads transistor pins value
-Serial.println(sensorValue);
+Serial.println(sensorValue); //prints out the sensor value
 
 
 if (sensorValue<85){ //red led turns on if less than 85
   digitalWrite(redPin, HIGH); //red led
   digitalWrite(yellowPin, LOW);// turns off Yellow LED
   digitalWrite(greenPin, LOW); //turns off Green LED
-} else if(sensorValue<170){
+} else if(sensorValue<170){ //start of else if statement
   digitalWrite(redPin, HIGH); //red led
   digitalWrite(yellowPin, HIGH);// turns off Yellow LED
   digitalWrite(greenPin, LOW); //turns off Green LED
@@ -60,4 +83,3 @@ if (sensorValue<85){ //red led turns on if less than 85
 delay(200); //delay
  
 } //end of program
-
