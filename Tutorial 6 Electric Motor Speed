@@ -20,11 +20,11 @@ Therefore increasing the potentiometer will increase the motor speed but also te
 precisely with the serial monitor and roughly with the three LED's
 
 Board Setup
-->
-->
-->
-->
-->
+A0 -> Analog leg of Potentiometer
+DIO 3 -> Emitter leg of Transistor
+DIO 11 -> 330ohm resistor -> Red LED
+DIO 12 -> 330ohm resistor -> Yellow LED
+DIO 13 -> 330ohm resistor -> Green LED
 ->
 ->
 ->
@@ -60,7 +60,7 @@ pinMode(transistorPin, OUTPUT); //sets the transistor pin to output
 
 void loop() //start of loop
 { //start of loop
-
+  
 sensorValue = analogRead(analogInPin); //reads the sensors value
 sensorValue = map(sensorValue, 0, 1023, 0, 255); //remaps potentiometer from 0-1023 to 0-255
 analogWrite(transistorPin, sensorValue); //reads transistor pins value
