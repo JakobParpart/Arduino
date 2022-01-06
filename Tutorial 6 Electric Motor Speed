@@ -17,8 +17,11 @@ The potentiometer changes the speed of the motor depending on how far its twiste
 
 int analogInPin = A0; //Declares analog pin to potentiometer
 int sensorValue = 0;// setes sensor value
-int outputValue = 0; //declares output value
+//int outputValue = 0; //declares output value
 int transistorPin = 3; //declares what pin the transistor goes to
+int redPin = 11;
+int yellowPin = 12;
+int greenPin = 13;
 
 
 
@@ -35,18 +38,26 @@ pinMode(transistorPin, OUTPUT); //sets the transistor pin to output
 void loop() //start of loop
 {
 
-sensorValue = analogRead(analogInPin)/4; //reads the sensors value
-outputValue = map(sensorValue, 0, 1023, 0, 255); //remaps potentiometer from 0-1023 to 0-255
+sensorValue = analogRead(analogInPin); //reads the sensors value
+sensorValue = map(sensorValue, 0, 1023, 0, 255); //remaps potentiometer from 0-1023 to 0-255
 analogWrite(transistorPin, sensorValue); //reads transistor pins value
-if (sensorValue >= 160) //if sensor value is greater than 160 turn on led
-{
+Serial.println(sensorValue);
 
-digitalWrite(8, HIGH); //sets pin 8 to high
-digitalWrite(9, LOW); //sets pin 9 to low
-}
 
-else //start of else statement
-{ digitalWrite(9, HIGH); //sets pin 9 to high
-digitalWrite(8, LOW); //sets pin 8 to low
-} //end of else
-delay(10); } //delay the program
+if (sensorValue<85){ //red led turns on if less than 85
+  digitalWrite(redPin, HIGH); //red led
+  digitalWrite(yellowPin, LOW);// turns off Yellow LED
+  digitalWrite(greenPin, LOW); //turns off Green LED
+} else if(sensorValue<170){
+  digitalWrite(redPin, HIGH); //red led
+  digitalWrite(yellowPin, HIGH);// turns off Yellow LED
+  digitalWrite(greenPin, LOW); //turns off Green LED
+} else{ //else statement
+  digitalWrite(redPin, HIGH); //red led
+  digitalWrite(yellowPin, HIGH);// turns off Yellow LED
+  digitalWrite(greenPin, HIGH); //turns off Green LED
+  }
+delay(200); //delay
+ 
+} //end of program
+
