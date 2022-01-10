@@ -20,15 +20,15 @@
   precisely with the serial monitor and roughly with the three LED's
   
   Board Setup
-  A0 -> Analog leg of Potentiometer
-  DIO 3 -> Emitter leg of Transistor
+  DIO 3 -> Base leg of Transistor
   DIO 11 -> 330ohm resistor -> Red LED
   DIO 12 -> 330ohm resistor -> Yellow LED
   DIO 13 -> 330ohm resistor -> Green LED
-  ->
-  ->
-  ->
-  ->
+  Positive wire of motor -> Collecter leg of Transistor
+  Positive Strip -> Emitter leg of Transistor
+  Power strip -> Positive Leg of Potentiometer
+  A0 -> Analog leg of Potentiometer
+  GND strip -> Ground leg of POT
 */
 
 
