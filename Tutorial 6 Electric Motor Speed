@@ -52,8 +52,9 @@ void setup()//start of setup
 {//start of setup
 
 Serial.begin(9600); //starts serial monitor
-pinMode(8, OUTPUT); //sets pin 8 to output
-pinMode(9, OUTPUT); //sets pin 9 to output
+pinMode(11, OUTPUT); //sets pin 11 to output
+pinMode(12, OUTPUT); //sets pin 12 to output
+pinMode(13, OUTPUT); //sets pin 13 to output
 pinMode(transistorPin, OUTPUT); //sets the transistor pin to output
 }//end of setup
 
