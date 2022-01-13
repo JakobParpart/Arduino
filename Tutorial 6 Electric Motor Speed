@@ -57,6 +57,7 @@ void loop() {//start of loop
   sensorValue = analogRead(analogInPin); //reads the sensors value
   sensorValue = map(sensorValue, 0, 1023, 0, 255); //remaps potentiometer from 0-1023 to 0-255
   analogWrite(transistorPin, sensorValue); //reads transistor pins value
+  Serial.print("Pot Value = "); //prints out "pot value ="
   Serial.println(sensorValue); //prints out the sensor value
 
 
@@ -64,14 +65,17 @@ void loop() {//start of loop
     digitalWrite(redPin, HIGH); //red led
     digitalWrite(yellowPin, LOW);// turns off Yellow LED
     digitalWrite(greenPin, LOW); //turns off Green LED
+    Serial.println("Red: ON\nYellow: OFF\nGreen: OFF");
   } else if(sensorValue<170){ //start of else if statement
     digitalWrite(redPin, HIGH); //red led
     digitalWrite(yellowPin, HIGH);// turns off Yellow LED
     digitalWrite(greenPin, LOW); //turns off Green LED
+     Serial.println("Red: ON\nYellow: ON\nGreen: OFF");
   } else{ //else statement
     digitalWrite(redPin, HIGH); //red led
     digitalWrite(yellowPin, HIGH);// turns off Yellow LED
     digitalWrite(greenPin, HIGH); //turns off Green LED
+    Serial.println("Red: ON\nYellow: ON\nGreen: ON");
   } //end of else
   delay(200); //delay
  
