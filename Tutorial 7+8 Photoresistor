@@ -1,0 +1,61 @@
+*/
+Tutorial 7 & 8 Modified Light Sensitive Gate
+Jakob Kay Parpart
+GHS 2021/2022
+Electrical Engineering Honors
+Coach L.
+
+This program makes use of a photoresistor, servo and a push button.
+The photoresistor is used to detect the light, depending on the light that it takes in
+determines how far the servo will turn to either direction.
+This is supposed to mimic an automated gate. Once the button is pushed, If there is light, the gate will open.
+If the button is pushed but no light, the servo will stay "closed"
+This could be used in your everyday life, say your driving up to your property,
+to open the gate you would usually have to get out and manually open it. Or you have a remote.
+But what if the gate malfunctions and opens even if you havent pressed the remote. This would leave your house vulnerable.
+Using this you have to push the button, then when driving up to the gate,
+the photoresistor will sense the light from your headlights. THis will open the gate.
+Once you have passed through, the gate will close after it doesn't sense light from your headlights or tailights.
+
+Board Setup:
+5V pin -> positive strip on breadboard
+GND pin -> negative strip of breadboard
+DIO 9 -> Input side of servo
+Positive strip -> Middle pin of servo
+GND strip -> GND pin of Servo
+DIO 2 -> positive leg of push button
+GND strip -> Negative leg of push button
+GND strip -> 330ohm resistor -> Photoresistor
+A0 -> Analog leg of Photoresistor
+GND strip -> Negaive leg of Photoresistor
+
+*/
+
+
+#include <servo.b>
+Servo myservo;
+int button = 2;
+int val;
+int photocell;
+  void setup() {
+      myservo.attatch(9);
+      pinMode(button, INPUT);
+      Serial.begin(9600);
+}
+void loop() {
+  photocell=ananlogRead(A0);
+  photocell=map(photocell,0,1023,0,180);
+  
+  val=digitalRead(button);
+  if(val == 1) {
+    Serial.println(val);
+    myservo.write(70);
+    delay(10);
+  }
+  else {
+    Serial.Println(photocell);
+    myservo.write(photocell);
+    delay(10);
+    }
+    
+}
