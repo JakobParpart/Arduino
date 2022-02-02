@@ -36,44 +36,62 @@ Servo myservo; //sets up servo
 int button = 2; // assigns pin to button
 int val; //sets up the value
 int photocell; // sets up the photoresistor
-volatile inr buttonState = 0;
+volatile int buttonState = 0; // used to store the button state
 
 void setup() { // start of setup
   myservo.attach(9); //declares what pin the servo is assigned to
   pinMode(button, INPUT); // sets button to input
-  attachInterrupt(digitalPinToInterrupt(2), buttonISR, FALLING); //function call, ISR initialization
+  attachInterrupt(digitalPinToInterrupt(2), buttonISR, RISING); //function call, ISR initialization
   Serial.begin(9600); //sets up serial monitor
 } //end of void
 
-void buttonISR () {
-  buttonState++;
-}
-
+void buttonISR () { buttonState++; } // ISR function declaration and definition
 
 void loop() { //start of void loop
+
+  /* FLUSH SERIAL MONITOR */
+  for(int i = 0; i < 20; i++) { // for loop
+    Serial.println(); // newline
+  } // end of for loop
+  
+  /* READ AND MANIPULATE VALUES */
+  
   photocell=analogRead(A0); //sets up analog pin to Photoresistor
-  photocell=map(photocell,0,1023,0,180); //remaps the photoresistor
- 
- 
-Serial.println(buttonState); //prints out val on serial monitor
+  
+  Serial.print("Photoresistor Value: "); // assertment (escape sequences to make it look nicer)
+  Serial.println(photocell); // assertment
+  
+  photocell = map(photocell,0,1023,0,180); // maps analog value to servo range
 
-  if(buttonState) { //if value = 1
-    myservo.write(0); //sets to angle position
-    delay(10); //delay of 10ms
-  } else { //start of else
-    Serial.println(photocell); //prints out photocell value
-    myservo.write(photocell); //writes "photocell"
-    delay(10); // delay of 10ms
-  } //end of else
+  /* UPDATE BUTTON STATE */
+  if(buttonState > 2) { // if buttonState is greater than 2
+    buttonState = 0; // set buttonState to linked
+  } // end of if statement
 
+  /* UPDATE AND WRITE TO OUTPUTS */
+ 
+  Serial.print("Mode: "); // assertment
+  
   switch (buttonState) {
-    case 0:
-      break;
-    case 1:
-      break;
-    case 2:
-      break;
-     
-   
-  }
+    case 0: /* SERVO IS LINKED TO LED*/
+      Serial.println("Linked"); // assertment
+      myservo.write(photocell); // update servo motor position
+      break; // exit case
+      
+    case 1: /* SERVO IS CLOSED */
+      Serial.println("Closed"); // assertment
+      myservo.write(0); // update servo motor position
+      break; // exit case
+      
+    case 2: /* SERVO IS OPEN */
+      Serial.println("Open"); // assertment
+      myservo.write(180); // update servo motor position
+      break; // exit case
+      
+    default: // if for some reason it goes past the value
+      Serial.println("Inside default case???"); // assertment
+      break; // exit case
+  } // end of switch case
+
+  delay(500); // delay
 } // end  of program
