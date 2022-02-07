@@ -1,3 +1,18 @@
+/*
+Tutorial 9 + 10 Home Security System
+Jakob Kay Parpart
+GHS 2021/2022
+Electrical Engineering Honors
+Coach L.
+
+This program makes use of a motion sensor, piezo and a SPDT switch.
+The switch will either arm or disarm the system.
+If motion is detected by the motion sensor, the piezo will sound and a red LED will flash.
+To disarm the system simply slide the switch to the off position.
+
+
+*/
+
 const int ledPin=13;//The led to indicate the motion
 void setup(){ //start of setup
    Serial.begin(9600); //start of serial monitor
