@@ -27,7 +27,7 @@ void loop() { //start of void loop
       digitalWrite(6,HIGH);   //To make the beep sound
       delay(100); //100ms delay
       digitalWrite(6,LOW); //set pin 6 to low
-      delay(100); 100ms delay
+      delay(100); //100ms delay
    } //end of void loop
    else{ //start of else
       digitalWrite(ledPin,LOW); //set led pin to low
