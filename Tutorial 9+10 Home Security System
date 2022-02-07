@@ -1,0 +1,21 @@
+const int ledPin=13;//The led to indicate the motion
+void setup(){ //start of setup
+   Serial.begin(9600); //start of serial monitor
+   pinMode(2, INPUT);//Use pin 2 to receive the signal outputted by the module 
+   pinMode(ledPin, OUTPUT); //set led pin as output
+   pinMode(6,OUTPUT); //set pin 6 as output
+} //end of setup
+void loop() { //start of void loop
+   int sensorValue = digitalRead(2); //sensor to pin 2
+   if(sensorValue==1){ //if sensor value = 1 sound alarm
+      digitalWrite(ledPin,HIGH);   //For debugging purposes
+      digitalWrite(6,HIGH);   //To make the beep sound
+      delay(100); //100ms delay
+      digitalWrite(6,LOW); //set pin 6 to low
+      delay(100); 100ms delay
+   } //end of void loop
+   else{ //start of else
+      digitalWrite(ledPin,LOW); //set led pin to low
+      Serial.println(sensorValue, DEC); //serial monitor printout
+   }//end of else
+}//end of program
