@@ -24,9 +24,9 @@ void loop() { //start of void loop
    int sensorValue = digitalRead(2); //sensor to pin 2
    if(sensorValue==1){ //if sensor value = 1 sound alarm
       digitalWrite(ledPin,HIGH);   //For debugging purposes
-      digitalWrite(6,HIGH);   //To make the beep sound
+      tone(6,200);   //To make the beep sound
       delay(100); //100ms delay
-      digitalWrite(6,LOW); //set pin 6 to low
+      noTone(6); //set pin 6 to low
       delay(100); //100ms delay
    } //end of void loop
    else{ //start of else
