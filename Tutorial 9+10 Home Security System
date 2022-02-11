@@ -41,7 +41,7 @@ void loop() {
   delayMicroseconds(10);
   digitalWrite(trigPin, LOW);
   
-  durationindigit = pulseIn(echoPin, HIGH);
+  durationDigit = pulseIn(echoPin, HIGH);
   Serial.println(durationDigit);
 
   
