@@ -12,38 +12,38 @@ To disarm the system simply slide the switch to the off position.
 
 
 */
+//All constant pins remain the same throughout the program
+const int trigPin = 2; //sets trig pin from Ultrasonic Sensor
+const int echoPin = 3; //sets echo pin from Ultrasonic Sensor
+const int LEDlampRed = 4; //sets Red LED
+const int LEDlampYellow = 5; //sets Yellow LED
+const int LEDlampGreen = 6; //sets Greem LED
+const int soundbuzzer = 7; //sets piezo buzzer
 
-const int trigPin = 2;
-const int echoPin = 3;
-const int LEDlampRed = 4;
-const int LEDlampYellow = 5;
-const int LEDlampGreen = 6;
-const int soundbuzzer = 7;
+int sound = 500; //piezo buzzer frequency
 
-int sound = 500;
-
-void setup() {
-  Serial.begin (9600);
+void setup() { //start of setup
+  Serial.begin (9600); //initialize serial monitor
   
-  pinMode(trigPin, OUTPUT);
-  pinMode(echoPin, INPUT);
-  pinMode(LEDlampRed, OUTPUT);
-  pinMode(LEDlampYellow, OUTPUT);
-  pinMode(LEDlampGreen, OUTPUT);
-  pinMode(soundbuzzer, OUTPUT);
-}
-void loop() {
-  long durationDigit;
+  pinMode(trigPin, OUTPUT); //sets trig pin as output
+  pinMode(echoPin, INPUT); //sets echo pin as input
+  pinMode(LEDlampRed, OUTPUT); //sets Red LED as output
+  pinMode(LEDlampYellow, OUTPUT); //sets Yellow LED as output
+  pinMode(LEDlampGreen, OUTPUT); //sets Green LED as output
+  pinMode(soundbuzzer, OUTPUT); // sets piezo as output
+} //end of setup
+void loop() { //start of loop
+  long durationDigit; //digit initialization
   
-  digitalWrite(trigPin, LOW);
-  delayMicroseconds(2);
-  digitalWrite(trigPin, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trigPin, LOW);
+  digitalWrite(trigPin, LOW); //sets trig pin to low
+  delayMicroseconds(2); //delay for the ultrasonic sensor
+  digitalWrite(trigPin, HIGH); //sets trig pin to high
+  delayMicroseconds(10); //delay for the ultrasonic sensor
+  digitalWrite(trigPin, LOW); //sets trig pin to low
   
-  durationDigit = pulseIn(echoPin, HIGH);
-  Serial.println(durationDigit);
+  durationDigit = pulseIn(echoPin, HIGH); //sets echo pin to high
+  Serial.println(durationDigit); //sets duration of the piezo
 
   
-  delay(300);
-}
+  delay(300); //300ms delay
+} //end of loop
