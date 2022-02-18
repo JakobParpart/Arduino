@@ -15,139 +15,139 @@ To turn off the piezo and lights you simply press the button once to reset the s
 Board Setup
 
 */
-const int triggeredLED = 7;
-const int triggeredLED2 = 8;
-const int RedLED = 4;        
-const int GreenLED = 5;      
-const int inputPin = A0;     
-const int speakerPin = 12;  
-const int armButton = 6;     
+const int triggeredLED = 7; //declare led pin (red)
+const int triggeredLED2 = 8; //declare led pin (blue)
+const int RedLED = 4; //declare led pin        
+const int GreenLED = 5; //declare led pin      
+const int inputPin = A0; //declare analog pin     
+const int speakerPin = 12; //declare piezo pin  
+const int armButton = 6; //declare push button     
 
-boolean isArmed = true;      
-boolean isTriggered = false;
-int buttonVal = 0;           
-int prev_buttonVal = 0;     
-int reading = 0;             
-int threshold = 0;           
+boolean isArmed = true; //arm the system      
+boolean isTriggered = false; //trigger the system
+int buttonVal = 0; //button value           
+int prev_buttonVal = 0; //button value     
+int reading = 0; //reading value             
+int threshold = 0; //threshold value           
 
 
-const int lowrange = 2000;   
-const int highrange = 4000; 
+const int lowrange = 2000; //piezo frequency (lowrange)   
+const int highrange = 4000; //piezo frequency (highrange)
 
-void setup(){
+void setup(){ //setup function
   
-  pinMode(triggeredLED, OUTPUT);
-  pinMode(triggeredLED2, OUTPUT);
-  pinMode(RedLED, OUTPUT);
-  pinMode(GreenLED, OUTPUT);
-  pinMode(armButton, INPUT);
-  digitalWrite(triggeredLED, HIGH);
-  delay(500);
-  digitalWrite(triggeredLED, LOW);  
+  pinMode(triggeredLED, OUTPUT); //set led as output (red)
+  pinMode(triggeredLED2, OUTPUT); //set led as output (blue)
+  pinMode(RedLED, OUTPUT); //set red led as output
+  pinMode(GreenLED, OUTPUT); //set green led as output
+  pinMode(armButton, INPUT); //button that arms the system
+  digitalWrite(triggeredLED, HIGH); //red led on
+  delay(500); // 500ms delay
+  digitalWrite(triggeredLED, LOW); //red led low
 
-   calibrate();
-   setArmedState();  
-}
+   calibrate(); //calibrates the system
+   setArmedState(); //determines whether the system is armed or not
+} //end of setup
 
-void loop(){
-
- 
-  reading = analogRead(inputPin);
+void loop(){ //start of loop
 
  
-  int buttonVal = digitalRead(armButton);
-  if ((buttonVal == HIGH) && (prev_buttonVal == LOW)){
+  reading = analogRead(inputPin); //sets analog as input pin
+
+ 
+  int buttonVal = digitalRead(armButton); //digital read arm button
+  if ((buttonVal == HIGH) && (prev_buttonVal == LOW)){ //
     setArmedState();
     delay(500);
   }
 
-  if ((isArmed) && (reading < threshold)){
-    isTriggered = true;}
+  if ((isArmed) && (reading < threshold)){ //if its armed and reading below threshold
+    isTriggered = true;} //it will trigger
 
-  if (isTriggered){
+  if (isTriggered){ //if statement
 
-     for (int i = lowrange; i <= highrange; i++)
-    {
-      tone (speakerPin, i, 250);
-    }
+     for (int i = lowrange; i <= highrange; i++) //for loop
+    { //start of for
+      tone (speakerPin, i, 250); //play note
+    } //end of for
    
-    for (int i = highrange; i >= lowrange; i--)
-    {
-      tone (speakerPin, i, 250);
-    }
+    for (int i = highrange; i >= lowrange; i--) //for loop
+    { //start of for
+      tone (speakerPin, i, 250); //play note
+    } //end of for
 
  
-    digitalWrite(triggeredLED, HIGH);
-    delay(50);
-    digitalWrite(triggeredLED, LOW);
-    delay (50);
-    digitalWrite(triggeredLED2, HIGH);
-    delay (50);
-    digitalWrite(triggeredLED2, LOW);
-    delay (50);
-    }
+    digitalWrite(triggeredLED, HIGH); //red led high
+    delay(50); //50ms delay
+    digitalWrite(triggeredLED, LOW); //red led low
+    delay (50); //50ms delay
+    digitalWrite(triggeredLED2, HIGH); //blue led high
+    delay (50); // 50ms delay
+    digitalWrite(triggeredLED2, LOW); //blue led low
+    delay (50); //50ms delay
+    } //end of for
 
-  delay(20);
-}
+  delay(20); //20ms delay
+} //end of if loop
 
-void setArmedState(){
+void setArmedState(){ //start of void
 
-  if (isArmed){
-    digitalWrite(GreenLED, HIGH);
-    digitalWrite(RedLED, LOW);
-    isTriggered = false;
-    isArmed = false;
-  } else {
-    digitalWrite(GreenLED, LOW);
-    digitalWrite(RedLED, HIGH);
-    tone(speakerPin, 220, 125);
-    delay(200);
-    tone(speakerPin, 196, 250);
-    isArmed = true;
-  } 
-}
+  if (isArmed){ //start of if
+    digitalWrite(GreenLED, HIGH); //green led high
+    digitalWrite(RedLED, LOW); //red led low
+    isTriggered = false; //not triggered
+    isArmed = false; //not armed
+  } else { //else statement
+    digitalWrite(GreenLED, LOW); //green led low
+    digitalWrite(RedLED, HIGH); //red led high
+    tone(speakerPin, 220, 125); //play tone
+    delay(200); //200ms delay
+    tone(speakerPin, 196, 250); //play tone
+    isArmed = true; //is armed
+  } //end of if
+} //end of else
 
-void calibrate(){
+void calibrate(){ //calibrate
 
-  int sample = 0;             
-  int baseline = 0;            
-  const int min_diff = 200; 
-  const int sensitivity = 50;
-  int success_count = 0;
+  int sample = 0; //set sample             
+  int baseline = 0; //set baseline            
+  const int min_diff = 200; //difference 
+  const int sensitivity = 50; //baseline value
+  int success_count = 0; //count
   
-  digitalWrite(RedLED, LOW);
-  digitalWrite(GreenLED, LOW);
+  digitalWrite(RedLED, LOW); //red led low
+  digitalWrite(GreenLED, LOW); //green led low
 
-  for (int i=0; i<10; i++){
-    sample += analogRead(inputPin);
-    digitalWrite(GreenLED, HIGH);
-    delay (50);
-    digitalWrite(GreenLED, LOW);
-    delay (50); 
-  }
+  for (int i=0; i<10; i++){ //for loop
+    sample += analogRead(inputPin); //analog read input
+    digitalWrite(GreenLED, HIGH); //green high
+    delay (50); //50ms delay
+    digitalWrite(GreenLED, LOW); //green led low
+    delay (50); //50ms delay
+  } //end of for loop
 
-  do
-  {
-    sample = analogRead(inputPin);    
+  do //do this:
+  { //start of do
+    sample = analogRead(inputPin); //analog read input    
 
-    if (sample > baseline + min_diff){
-      success_count++;
-      threshold += sample;
+    if (sample > baseline + min_diff){ //start of if
+      success_count++; //success counter
+      threshold += sample; //keeps track of samples
 
-      digitalWrite(GreenLED, HIGH);
-      delay (100);                    
-      digitalWrite(GreenLED, LOW);
-      delay (100);                    
-    } else {
-      success_count = 0;             
-      threshold = 0;
-    }
+      digitalWrite(GreenLED, HIGH); //green led high
+      delay (100); //100ms delay                    
+      digitalWrite(GreenLED, LOW); //green led low
+      delay (100); //100ms delay                    
+    } else { //start of else
+      success_count = 0; //success count             
+      threshold = 0; //threshold count
+    } //end of else
 
-  } while (success_count < 3);
+  } while (success_count < 3); //start of while loop
 
-  threshold = (threshold/3) - sensitivity;
+  threshold = (threshold/3) - sensitivity; //divide threshold by 3
 
-  tone(speakerPin, 196, 250);
-  delay(200);
-  tone(speakerPin, 220, 125);
-}
+  tone(speakerPin, 196, 250); //play tone
+  delay(200); //200ms delay
+  tone(speakerPin, 220, 125); //play tone
+} //end of while
