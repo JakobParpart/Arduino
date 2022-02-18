@@ -1,3 +1,20 @@
+/*
+Tutorial 9 + 10 Home Security System
+Jakob Kay Parpart
+GHS 2021/2022
+Electrical Engineering Honors
+Coach L.
+
+This program makes use of a laser, photoresistor, piezo and 4 LEDs and a button.
+The button has 3 states, on, reset, and off. 
+There are two LED's to let you know whether the system is armed or disarmed.
+Once you turn on the system, the laser will shine at the photoresistor.
+Once the beam is interrupted by something passing by, the piezo will sound and the LED's will blink.
+To turn off the piezo and lights you simply press the button once to reset the system.
+
+Board Setup
+
+*/
 const int triggeredLED = 7;
 const int triggeredLED2 = 8;
 const int RedLED = 4;        
