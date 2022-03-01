@@ -1,4 +1,4 @@
-/*
+ /*
 Tutorial 9 + 10 Home Security System
 Jakob Kay Parpart
 GHS 2021/2022
@@ -10,7 +10,24 @@ There are two LED's to let you know whether the system is armed or disarmed.
 Once you turn on the system, the laser will shine at the photoresistor.
 Once the beam is interrupted by something passing by, the piezo will sound and the LED's will blink.
 To turn off the piezo and lights you simply press the button once to reset the system.
-Board Setup
+
+Board Setup:
+DIO 4-> Red LED
+330ohm resistor from ground to negative leg of Red LED
+DIO 5-> Green LED
+330 ohm resistor from GND to negative leg of Green LED
+DIO 6 -> positive side of button
+DIO 7 -> Blue LED
+330 ohm resistor from GND to negative leg of Blue LED
+DIO 8 -> Red LED
+330 ohm resistor from GND to negative leg of Red LED
+GND strip -> negative side of piezo
+DIO 12 -> positive of piezo
+A0 -> photoresistor
+GND -> 330 ohm resistor -> photoresistor
+positive strip -> photoresistor
+GND strip -> negative pin of laser
+3.3V pin -> positive pin of laser
 */
 const int triggeredLED = 7; //declare led pin (red)
 const int triggeredLED2 = 8; //declare led pin (blue)
@@ -59,7 +76,9 @@ void loop(){ //start of loop
   }
 
   if ((isArmed) && (reading < threshold)){ //if its armed and reading below threshold
-    isTriggered = true;} //it will trigger
+    isTriggered = true;
+    Serial.println("Motion detected"); //serial monitor printout
+  } //it will trigger
 
   if (isTriggered){ //if statement
 
@@ -94,12 +113,14 @@ void setArmedState(){ //start of void
     digitalWrite(RedLED, LOW); //red led low
     isTriggered = false; //not triggered
     isArmed = false; //not armed
+    Serial.println("System is unarmed"); //serial monitor printout
   } else { //else statement
     digitalWrite(GreenLED, LOW); //green led low
     digitalWrite(RedLED, HIGH); //red led high
     tone(speakerPin, 220, 125); //play tone
     delay(200); //200ms delay
     tone(speakerPin, 196, 250); //play tone
+    Serial.println("System is armed"); //serial monitor printout
     isArmed = true; //is armed
   } //end of if
 } //end of else
@@ -148,8 +169,3 @@ void calibrate(){ //calibrate
   delay(200); //200ms delay
   tone(speakerPin, 220, 125); //play tone
 } //end of while
-
-void serialprints() {
-  serial.println()
-  
-}
