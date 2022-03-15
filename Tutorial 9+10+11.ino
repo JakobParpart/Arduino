@@ -10,7 +10,6 @@ There are two LED's to let you know whether the system is armed or disarmed.
 Once you turn on the system, the laser will shine at the photoresistor.
 Once the beam is interrupted by something passing by, the piezo will sound and the LED's will blink.
 To turn off the piezo and lights you simply press the button once to reset the system.
-
 Board Setup:
 DIO 4-> Red LED
 330ohm resistor from ground to negative leg of Red LED
@@ -50,6 +49,7 @@ const int highrange = 4000; //piezo frequency (highrange)
 
 void setup(){ //setup function
   
+  Serial.begin(9600);
   pinMode(triggeredLED, OUTPUT); //set led as output (red)
   pinMode(triggeredLED2, OUTPUT); //set led as output (blue)
   pinMode(RedLED, OUTPUT); //set red led as output
@@ -77,7 +77,7 @@ void loop(){ //start of loop
 
   if ((isArmed) && (reading < threshold)){ //if its armed and reading below threshold
     isTriggered = true;
-    Serial.println("Motion detected"); //serial monitor printout
+    Serial.println("INTRUDER ALERT"); //serial monitor printout
   } //it will trigger
 
   if (isTriggered){ //if statement
@@ -120,7 +120,7 @@ void setArmedState(){ //start of void
     tone(speakerPin, 220, 125); //play tone
     delay(200); //200ms delay
     tone(speakerPin, 196, 250); //play tone
-    Serial.println("System is armed"); //serial monitor printout
+    Serial.println("System Activated"); //serial monitor printout
     isArmed = true; //is armed
   } //end of if
 } //end of else
