@@ -1,0 +1,30 @@
+#include <LiquidCrystal.h> 
+LiquidCrystal lcd(12,11,5,4,3,2); //declare LCD pins
+int temp = 0; //set up temperature
+
+void setup() { //begin of setup
+  pinMode(A1,INPUT); //declare pin as input
+  pinMode(9,OUTPUT); //declare pin as output
+  pinMode(9,OUTPUT); //declare pin as output
+  lcd.begin(16, 2); //initialize LCD
+  lcd.print("LCD Begins.....!"); //begin LCD
+  delay(2000); //2000ms delay
+  lcd.clear(); //clear LCD
+  lcd.print("Temp value:"); //print "temp value on LCD"
+} // end of setup
+
+void loop() { //start of void loop
+  temp = analogRead(A1); //declare analog pin
+  if(temp >= 0 && temp < 300){ //declare low range of temp
+      analogWrite(9,85); //speed of motor based on temp
+
+} //end of void loop
+  else if(temp >= 310 && temp < 600){ //declare mid range of temp
+      analogWrite(9,170); //speed of motor based on temp
+
+  } //end of else if
+  else if(temp >= 610 && temp < 1023){ //declare high range of temp
+        analogWrite(9,255); //speed of motor based on temp
+
+  } //end of else if
+} //end of program
