@@ -1,0 +1,92 @@
+
+/* Tutorial 12 + 13 Climate control
+ * Jakob Kay Parpart
+ * GHS 2021/2022
+ * Electrical Engineering Honors
+ * Coach L.
+ * 
+ * 
+ * About:
+ * This program makes use of a potentiometer, a servo, temperature sensor and lcd screen
+ * The servo will either open or close depending on the temperature picked up by the sensor
+ * The LCD screen will display the voltage along with the tempperature.
+ * This shows how far the servo is opened and what the current temperature is
+ * Climate control in a car works in a similar way, a temp sensor reads the temp and depending on that
+ * it will either open the vents to allow more air through or less air. 
+ *
+ *
+ *Board Description:
+ *
+ *
+ */
+
+
+#include <Servo.h> //include servo library
+#include <LiquidCrystal.h> //include LCD display library
+
+Servo myservo; //setup servo
+
+LiquidCrystal lcd (12, 11, 5, 4, 3, 2); //sets lcd display pins
+const int Beep = 7; //defines pin 7 as buzzer
+
+int pos = 0; //store servo position
+int temperature; //temperature
+
+
+void setup() //start of setup
+{ //start of setup
+  Serial.begin(9600); //initiate serial monitor
+  lcd.begin(15,2); //sets up lcd
+  pinMode(Beep, OUTPUT); //sets pin to output
+  pinMode(8, OUTPUT); //sets pin 8 to output
+  myservo.attach(9); //servo to pin 9
+}//end of setup
+
+void loop(){ //start of void loop
+
+  int sensorValue = analogRead(A0); //analog pin
+  float voltage = sensorValue * (5.0/1023.0); //voltage display
+  float tempConvert = 20 + 20 + (2.87 - (sensorValue * (5.0 / 1023.0))); //calculates temperature
+  Serial.println(voltage);//prints out voltage
+
+  led.setCursor(0,0);//setup top line
+  led.print("Temp: "); //printout on lcd
+  led.print(tempConvert); //prints value
+
+  led.setCursor(0,1); //setup bottom line message
+  led.print("Volt:"); //printout on lcd
+  led.print(voltage); //prints value
+  delay(50); //50ms delay
+
+  if ((tempConvert > 25 && (tempConvert) < 40) //servo positions at 100
+
+  { //start of if
+    myservo.write(100); //writes servo position
+    delay(1000); //one second delay
+  } //end of if
+
+ if ((tempConvert) > 22 && (tempConvert) <24.9) //servo position at 180
+
+ { //start of if
+  myservo.write(90); //writes servo position
+  delay(1000); //one second delay
+ } //end of if
+
+  if ((tempConvert) >21 && (tempConvert) <21.9) //servo position at 180
+  
+  { //start of if
+    myservo.write(0); //writes servo position
+    delay(1000); //one second delay
+  } //end of if
+  
+  if (tempConvert <=20.9) //if temp is greater than or equal to 20.9
+  { //start of if
+    digitalWrite(Beep, HIGH); //turns on piezo
+    delay(100); //100ms delay
+  } //end of if
+  else //else statement
+  { //start of else
+    digitalWrite(Beep, LOW); //turns off piezo
+  } //end of else
+  
+} //end of program
