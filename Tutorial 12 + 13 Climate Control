@@ -1,4 +1,3 @@
-
 /* Tutorial 12 + 13 Climate control
  * Jakob Kay Parpart
  * GHS 2021/2022
@@ -49,16 +48,16 @@ void loop(){ //start of void loop
   float tempConvert = 20 + 20 + (2.87 - (sensorValue * (5.0 / 1023.0))); //calculates temperature
   Serial.println(voltage);//prints out voltage
 
-  led.setCursor(0,0);//setup top line
-  led.print("Temp: "); //printout on lcd
-  led.print(tempConvert); //prints value
+  lcd.setCursor(0,0);//setup top line
+  lcd.print("Temp: "); //printout on lcd
+  lcd.print(tempConvert); //prints value
 
-  led.setCursor(0,1); //setup bottom line message
-  led.print("Volt:"); //printout on lcd
-  led.print(voltage); //prints value
+  lcd.setCursor(0,1); //setup bottom line message
+  lcd.print("Volt:"); //printout on lcd
+  lcd.print(voltage); //prints value
   delay(50); //50ms delay
 
-  if ((tempConvert > 25 && (tempConvert) < 40) //servo positions at 100
+  if ((tempConvert > 25 && (tempConvert) < 40)) //servo positions at 100
 
   { //start of if
     myservo.write(100); //writes servo position
