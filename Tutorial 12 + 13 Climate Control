@@ -16,7 +16,23 @@
  *
  *Board Description:
  *
- *
+ * DIO 12 -> LCD
+ * DIO 11 -> LCD
+ * DIO 10 -> LCD
+ * DIO 9 -> Servo
+ * DIO 7 -> Piezo
+ * DIO 5 -> LCD
+ * DIO 4 -> LCD
+ * DIO 3 -> LCD
+ * DIO 2 -> LCD
+ * 5V -> Positive Strip
+ * GND -> Ground strip
+ * Positive Strip -> Temp sensor
+ * A0 -> Temp sensor
+ * GND strip -> Temp sensor
+ * Positive Strip -> POT
+ * Middle pin of POT -> LCD
+ * GND Strip -> POT
  */
 
 
