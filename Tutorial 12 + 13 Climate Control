@@ -43,6 +43,8 @@ Servo myservo; //setup servo
 
 LiquidCrystal lcd (12, 11, 5, 4, 3, 2); //sets lcd display pins
 const int Beep = 7; //defines pin 7 as buzzer
+const int tempPin = A0;
+
 
 int pos = 0; //store servo position
 int temperature; //temperature
@@ -60,8 +62,10 @@ void setup() //start of setup
 void loop(){ //start of void loop
 
   int sensorValue = analogRead(A0); //analog pin
-  float voltage = sensorValue * (5.0/1023.0); //voltage display
-  float tempConvert = 20 + 20 + (2.87 - (sensorValue * (5.0 / 1023.0))); //calculates temperature
+  float voltage = (sensorValue*5); // voltage value
+  voltage /= 1023;
+  float tempConvert = (voltage-.5)*100; // sensor value (after conversion)
+  
   Serial.println(voltage);//prints out voltage
 
   lcd.setCursor(0,0);//setup top line
