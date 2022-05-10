@@ -1,5 +1,5 @@
 /*
-Final Tutorial
+Tutorial 9 + 10 Home Security System
 Jakob Kay Parpart
 GHS 2021/2022
 Electrical Engineering Honors
@@ -33,15 +33,15 @@ const int triggeredLED2 = 8; //declare led pin (blue)
 const int RedLED = 4; //declare led pin        
 const int GreenLED = 5; //declare led pin      
 const int inputPin = A0; //declare analog pin     
-const int speakerPin = 12; //declare piezo pin  
-const int armButton = 6; //declare push button     
+const int speakerPin = 3; //declare piezo pin  
+const int armButton = 8; //declare push button     
 
 boolean isArmed = true; //arm the system      
 boolean isTriggered = false; //trigger the system
 int buttonVal = 0; //button value           
 int prev_buttonVal = 0; //button value     
 int reading = 0; //reading value             
-int threshold = 0; //threshold value           
+int threshold = 250; //threshold value           
 
 
 const int lowrange = 2000; //piezo frequency (lowrange)   
@@ -67,9 +67,10 @@ void loop(){ //start of loop
 
  
   reading = analogRead(inputPin); //sets analog as input pin
-
+  
  
   int buttonVal = digitalRead(armButton); //digital read arm button
+  Serial.println(buttonVal);
   if ((buttonVal == HIGH) && (prev_buttonVal == LOW)){ //
     setArmedState();
     delay(500);
@@ -169,3 +170,4 @@ void calibrate(){ //calibrate
   delay(200); //200ms delay
   tone(speakerPin, 220, 125); //play tone
 } //end of while
+
