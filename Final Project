@@ -1,3 +1,4 @@
+
 /*
 Tutorial 9 + 10 Home Security System
 Jakob Kay Parpart
@@ -28,6 +29,12 @@ positive strip -> photoresistor
 GND strip -> negative pin of laser
 3.3V pin -> positive pin of laser
 */
+
+#include <deprecated.h>
+#include <MFRC522.h>
+#include <MFRC522Extended.h>
+#include <require_cpp11.h>
+
 const int triggeredLED = 7; //declare led pin (red)
 const int triggeredLED2 = 8; //declare led pin (blue)
 const int RedLED = 4; //declare led pin        
