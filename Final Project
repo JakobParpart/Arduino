@@ -1,16 +1,18 @@
 
 /*
-Tutorial 9 + 10 Home Security System
+Final Project
 Jakob Kay Parpart
 GHS 2021/2022
 Electrical Engineering Honors
 Coach L.
-This program makes use of a laser, photoresistor, piezo and 4 LEDs and a button.
+This program makes use of a laser, photoresistor, piezo and 4 LEDs, a button and RFID scanner.
 The button has 3 states, on, reset, and off. 
 There are two LED's to let you know whether the system is armed or disarmed.
 Once you turn on the system, the laser will shine at the photoresistor.
 Once the beam is interrupted by something passing by, the piezo will sound and the LED's will blink.
+A message will be sent to your phone via discord. This is done using a discord bot.
 To turn off the piezo and lights you simply press the button once to reset the system.
+If the system is armed you can scan the RFID card to prevent the system from going off even if its armed.
 Board Setup:
 DIO 4-> Red LED
 330ohm resistor from ground to negative leg of Red LED
