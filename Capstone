@@ -81,8 +81,8 @@ const int highrange = 4000; //piezo frequency (highrange)
 void setup(){ //setup function
   
   Serial.begin(9600);
-  pinMode(alarmLED, OUTPUT); //set led as output (red)
-  pinMode(alarmLED2, OUTPUT); //set led as output (blue)
+  pinMode(redLED, OUTPUT); //set led as output (red)
+  pinMode(blueLED, OUTPUT); //set led as output (blue)
   pinMode(RedLED, OUTPUT); //set red led as output
   pinMode(GreenLED, OUTPUT); //set green led as output
   pinMode(armButton, INPUT); //button that arms the system
