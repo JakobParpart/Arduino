@@ -140,9 +140,10 @@ void setArmedState(){ //start of void
     isArmed = true; //is armed
   } //end of if
 } //end of else
+//write something like if RFID card is present then disarm the system. otherwise dont. Put it near the button since it has a similar function.
+//The RFID is a substitute for the button. 
 
 void calibrate(){ //calibrate
-
   int sample = 0; //set sample             
   int baseline = 0; //set baseline            
   const int min_diff = 200; //difference 
