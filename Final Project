@@ -14,6 +14,7 @@ A message will be sent to your phone via discord. This is done using a discord b
 To turn off the piezo and lights you simply press the button once to reset the system.
 If the system is armed you can scan the RFID card to prevent the system from going off even if its armed.
 Board Setup:
+DIO 3 -> positive of piezo
 DIO 4-> Red LED
 330ohm resistor from ground to negative leg of Red LED
 DIO 5-> Green LED
@@ -24,7 +25,12 @@ DIO 7 -> Blue LED
 DIO 8 -> Red LED
 330 ohm resistor from GND to negative leg of Red LED
 GND strip -> negative side of piezo
-DIO 12 -> positive of piezo
+DIO 9 -> SDA on Scanner
+DIO 10 -> MOS on scanner
+DIO 11 -> MI on Scanner
+DIO 12 -> ISO on scanner
+DIO 13 -> SCK on Scanner
+GND -> GND of scanner
 A0 -> photoresistor
 GND -> 330 ohm resistor -> photoresistor
 positive strip -> photoresistor
@@ -59,8 +65,8 @@ const int highrange = 4000; //piezo frequency (highrange)
 void setup(){ //setup function
   
   Serial.begin(9600);
-  pinMode(triggeredLED, OUTPUT); //set led as output (red)
-  pinMode(triggeredLED2, OUTPUT); //set led as output (blue)
+  pinMode(alarmLED, OUTPUT); //set led as output (red)
+  pinMode(alarmLED2, OUTPUT); //set led as output (blue)
   pinMode(RedLED, OUTPUT); //set red led as output
   pinMode(GreenLED, OUTPUT); //set green led as output
   pinMode(armButton, INPUT); //button that arms the system
@@ -79,14 +85,14 @@ void loop(){ //start of loop
   
  
   int buttonVal = digitalRead(armButton); //digital read arm button
-  Serial.println(buttonVal);
-  if ((buttonVal == HIGH) && (prev_buttonVal == LOW)){ //
-    setArmedState();
-    delay(500);
-  }
+  Serial.println(buttonVal);//serial prints button value
+  if ((buttonVal == HIGH) && (prev_buttonVal == LOW)){ //start of if
+    setArmedState();//sets state
+    delay(500);//delay
+  }//end of if
 
   if ((isArmed) && (reading < threshold)){ //if its armed and reading below threshold
-    isTriggered = true;
+    isTriggered = true; //if its triggered
     Serial.println("INTRUDER ALERT"); //serial monitor printout
   } //it will trigger
 
