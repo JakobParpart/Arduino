@@ -96,7 +96,7 @@ void setup(){ //setup function
   Serial.println("Approximate your card to the reader...");
   Serial.println(); //print space
 
-   //calibrate(); //calibrates the system
+   calibrate(); //calibrates the system
    setArmedState(); //determines whether the system is armed or not
    
 } //end of setup
@@ -112,6 +112,21 @@ void loop(){ //start of loop
   if ((buttonVal == HIGH) && (prev_buttonVal == LOW)){ //start of if
     setArmedState();//sets state
     delay(500);//delay
+
+// if (content.substring(1) == "53 98 2D 07") //grants access to this uid
+ // { //start of if
+ //   Serial.println("Authorized access"); //serial print
+  //  Serial.println(); //prints spce
+ //   delay(3000); //3 second delay
+ // } //end of if
+ 
+ else   { //start of else
+    Serial.println(" Access denied"); //serial prints 
+    delay(3000); //3 second delay
+  } //end of else
+
+
+    
   }//end of if
 
   if ((isArmed) && (reading < threshold)){ //if its armed and reading below threshold
