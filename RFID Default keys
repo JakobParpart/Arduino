@@ -154,13 +154,11 @@ void loop() {
     
     // Try the known default keys
     MFRC522::MIFARE_Key key;
-    for (byte k = 0; k < NR_KNOWN_KEYS; k++) {
-        // Copy the known key into the MIFARE_Key structure
+    for (byte k = 0; k < NR_KNOWN_KEYS; k++) { //for loop reading for RFID
         for (byte i = 0; i < MFRC522::MF_KEY_SIZE; i++) {
             key.keyByte[i] = knownKeys[k][i];
         }
-        // Try the key
-        if (try_key(&key)) {
+        if (try_key(&key)) { //tests for correct uid
             // Found and reported on the key and block,
             // no need to try other keys for this PICC
             Serial.println("\n\n\n\n\n~~~~~~~~\n");
@@ -168,7 +166,7 @@ void loop() {
             
             
             // ...
-            while (true){
+            while (true){ //while loop
                 reading = analogRead(inputPin); //reads analog input pin
   
  
