@@ -46,13 +46,13 @@ Card UID: 53 98 2D 07
 Keychain UID: 73 E2 98 0D
 */
 
-#include <deprecated.h>
-#include <MFRC522.h>
-#include <MFRC522Extended.h>
-#include <require_cpp11.h>
+#include <deprecated.h> //includes rfid library
+#include <MFRC522.h> //includes rfid scanner library 
+#include <MFRC522Extended.h> //includes rfid library
+#include <require_cpp11.h> //includes rfid library
 
-#include <SPI.h>
-#include <MFRC522.h>
+#include <SPI.h> //rfid library
+#include <MFRC522.h> //rfid library
 
 #define RST_PIN         9          // Configurable, see typical pin layout above
 #define SS_PIN          10         // Configurable, see typical pin layout above
@@ -79,11 +79,11 @@ int threshold = 250; //threshold value
 const int lowrange = 2000; //piezo frequency (lowrange)   
 const int highrange = 4000; //piezo frequency (highrange)
 //prototype functions
-void calibrate();
-void setArmedState();
+void calibrate(); //calibrate
+void setArmedState(); //sets armed state
 void setup(){ //setup function
   
-  Serial.begin(9600);
+  Serial.begin(9600); //initializes serial monitor
   pinMode(redLED, OUTPUT); //set led as output (red)
   pinMode(blueLED, OUTPUT); //set led as output (blue)
   pinMode(RedLED, OUTPUT); //set red led as output
@@ -96,7 +96,7 @@ void setup(){ //setup function
   Serial.begin(9600);   // Initiate a serial communication
   SPI.begin();      // Initiate  SPI bus
   mfrc522.PCD_Init();   // Initiate MFRC522
-  Serial.println("Approximate your card to the reader...");
+  Serial.println("Approximate your card to the reader..."); //serial print
   Serial.println(); //print space
 
    calibrate(); //calibrates the system
@@ -104,7 +104,7 @@ void setup(){ //setup function
    
 } //end of setup
 
-void loop()
+void loop() //main loop
 { //start of loop
 
  
@@ -116,7 +116,7 @@ void loop()
   if ((buttonVal == HIGH) && (prev_buttonVal == LOW)){ //start of if
     setArmedState();//sets state
     delay(100);//delay
-  }
+  } //end of if
    
   
     if ((isArmed) && (reading < threshold)){ //if its armed and reading below threshold
@@ -151,7 +151,7 @@ void loop()
     } //end of for
 
   delay(20); //20ms delay
-cardread();
+cardread(); //reads for card
   
 } //end of if loop
 
@@ -224,45 +224,43 @@ void calibrate(){ //calibrate
 void cardread(){ //calibrate
   //------------------------------------------------------------------------------------------------------------------------
     // Look for new cards
-    if ( ! mfrc522.PICC_IsNewCardPresent()) 
-    {
-      return;
-    }
+    if ( ! mfrc522.PICC_IsNewCardPresent()) //reads for new card
+    { //start of if
+      return; //returns to previous if not found
+    } //end of if
     // Select one of the cards
-     if ( ! mfrc522.PICC_ReadCardSerial()) 
-     {
-    return;
-     }
+     if ( ! mfrc522.PICC_ReadCardSerial()) //if the correct card is found
+     { //start of if
+    return; //returns to previous
+     } // end of if
    //Show UID on serial monitor
-  Serial.print("UID tag :");
-  String content= "";
+  Serial.print("UID tag :"); //prints UID tag
+  String content= ""; //string declaration
   //byte letter;
-  for (byte i = 0; i < mfrc522.uid.size; i++) 
-  {
-     Serial.print(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " ");
-     Serial.print(mfrc522.uid.uidByte[i], HEX);
-     content.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " "));
-     content.concat(String(mfrc522.uid.uidByte[i], HEX));
-  }
-  Serial.println();
-  Serial.print("Message : ");
-  content.toUpperCase();
-  if (content.substring(1) == "53 98 2D 07") //change here the UID of the card/cards that you want to give access ==> my access card: 53 98 2D 07
-  {
+  for (byte i = 0; i < mfrc522.uid.size; i++)  //start of rfid for loop
+  { //start of for loop
+     Serial.print(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " "); //uid tag function
+     Serial.print(mfrc522.uid.uidByte[i], HEX); //prints uid tag
+     content.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " ")); //uid tag function
+     content.concat(String(mfrc522.uid.uidByte[i], HEX)); //prints uid tag
+  } //end of for
+  Serial.println(); //serial 
+  Serial.print("Message : "); //prints "message"
+  content.toUpperCase(); //content string
+  if (content.substring(1) == "53 98 2D 07") //gives access to UID number 53 98 2D 07
+  { //start of if
     
-    Serial.println("Authorized access");
-    Serial.println();
+    Serial.println("Authorized access"); //serial prints "authuorized access"
+    Serial.println(); //serial prints space
     digitalWrite(RedLED, LOW); //red led low
     digitalWrite(GreenLED, HIGH); //green led high
     isTriggered = false; //not triggered
     isArmed = false; //not armed
-    delay(30);
-  }
+    delay(30); //30ms delay
+  } //end of for
  
- else   {
-    Serial.println(" Access denied");
-    delay(30);
-  }
-}
-//----------------------------------------------------------------------------------------------------------------
-  //end of if
+ else   { //start of else
+    Serial.println(" Access denied"); //serial prints "access denied"
+    delay(30); // 30ms delay
+  } //end of else
+} //end of main loop (program)
